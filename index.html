@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amber Kingdom - Vàng Tiền Tài | Minecraft Server</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold-primary: #FFD700;
+            --gold-dark: #B8860B;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-light: #f8f9fa;
+
+            /* Key Colors */
+            --key-common: #2ecc71;
+            --key-rare: #3498db;
+            --key-epic: #d946ef;
+            --key-superior: #FFD700;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            padding-top: 70px;
+        }
+
+        h1, h2, h3, h4, .noble-font {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Navbar Royal --- */
+        .navbar-royal {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--gold-dark);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-primary) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-buy-nav {
+            background: linear-gradient(45deg, var(--gold-dark), var(--gold-primary));
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 8px 25px;
+            border-radius: 30px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-buy-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+            color: #000;
+        }
+
+        /* --- Particles Background --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('https://i.imgur.com/X9x0c2c.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* --- Text Gradients --- */
+        .gold-text {
+            background: linear-gradient(to right, var(--gold-primary), var(--gold-dark), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* --- Event Ticker --- */
+        .royal-event-container {
+            margin-top: 40px;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid var(--gold-dark);
+            border-radius: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(5px);
+            min-width: 50%;
+            max-width: 90%;
+            overflow: hidden;
+        }
+
+        .royal-event-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .event-badge {
+            background: var(--gold-primary);
+            color: #000;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 4px;
+            margin-right: 15px;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 0 10px var(--gold-primary);
+            animation: pulse 2s infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .event-content {
+            color: var(--text-light);
+            font-weight: 500;
+            text-align: left;
+            flex-grow: 1;
+            opacity: 0; 
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Buttons --- */
+        .hero-btn-group .btn { margin: 10px; min-width: 200px; }
+
+        .btn-ip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ip:hover {
+            border-color: var(--gold-primary);
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .btn-discord-hero {
+            background: #5865F2;
+            border: 1px solid #5865F2;
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-discord-hero:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.5);
+            color: white;
+        }
+
+        /* --- Sections --- */
+        section { padding: 80px 0; border-bottom: 1px solid #222; }
+        .section-title-line { width: 60px; height: 3px; background: var(--gold-primary); margin: 20px auto; }
+
+        /* --- FEATURES --- */
+        .feature-card-royal {
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 30px 20px;
+            height: 100%;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .feature-card-royal:hover { transform: translateY(-10px); border-color: var(--gold-primary); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .icon-gem-wrapper { width: 80px; height: 80px; margin: 0 auto 25px auto; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(0, 0, 0, 0.6); border: 2px solid var(--gold-dark); transition: 0.5s; }
+        .feature-icon { font-size: 2.2rem; background: linear-gradient(180deg, #fff, var(--gold-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: 0.5s; }
+        .feature-card-royal:hover .icon-gem-wrapper { border-color: var(--gold-primary); transform: rotateY(180deg); }
+        .feature-card-royal:hover .feature-icon { transform: rotateY(-180deg); }
+        .feature-title { font-size: 1.3rem; margin-bottom: 15px; color: var(--gold-primary); }
+        .feature-desc { color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; }
+
+        /* --- INTERACTIVE CARDS (CLICKABLE) --- */
+        .rank-card, .key-card-royal, .coin-card {
+            cursor: pointer; /* Biến con trỏ thành bàn tay */
+        }
+        
+        /* --- Rank Cards --- */
+        .rank-card { background: var(--bg-card); border-radius: 20px; overflow: hidden; border: 2px solid #333; transition: 0.4s; height: 100%; }
+        .rank-card:hover { border-color: var(--gold-primary); box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); transform: scale(1.03); }
+        .rank-header { background: linear-gradient(45deg, #000, #333); padding: 20px; text-align: center; border-bottom: 2px solid var(--gold-dark); }
+        .rank-name { font-size: 1.8rem; color: var(--gold-primary); margin: 0; }
+        .rank-price-box { background: rgba(0, 0, 0, 0.5); padding: 15px; text-align: center; }
+        .feature-list { padding: 20px; list-style: none; margin: 0; }
+        .feature-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 215, 0, 0.1); }
+        .feature-list i { color: var(--gold-primary); margin-right: 10px; }
+
+        /* --- Key Cards --- */
+        .key-card-royal { background: #151515; border-radius: 15px; position: relative; padding: 30px 20px; text-align: center; transition: 0.4s; border: 1px solid #333; height: 100%; overflow: hidden; }
+        .key-common { border-bottom: 4px solid var(--key-common); } .key-common:hover { box-shadow: 0 0 25px rgba(46, 204, 113, 0.4); border-color: var(--key-common); } .key-common .key-icon { color: var(--key-common); }
+        .key-rare { border-bottom: 4px solid var(--key-rare); } .key-rare:hover { box-shadow: 0 0 25px rgba(52, 152, 219, 0.4); border-color: var(--key-rare); } .key-rare .key-icon { color: var(--key-rare); }
+        .key-epic { border-bottom: 4px solid var(--key-epic); } .key-epic:hover { box-shadow: 0 0 25px rgba(217, 70, 239, 0.4); border-color: var(--key-epic); } .key-epic .key-icon { color: var(--key-epic); }
+        .key-superior { border-bottom: 4px solid var(--key-superior); } .key-superior:hover { box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); border-color: var(--key-superior); } .key-superior .key-icon { color: var(--key-superior); }
+        .key-icon { font-size: 3rem; margin-bottom: 20px; transition: 0.4s; text-shadow: 0 0 10px currentColor; }
+        .key-card-royal:hover .key-icon { transform: scale(1.1) rotate(10deg); }
+        .key-title { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+        .key-qty { font-size: 2.5rem; font-weight: bold; margin: 10px 0; }
+        .key-bonus { background: rgba(255, 255, 255, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; }
+
+        /* --- COIN Cards --- */
+        .coin-card { background: #181818; border: 1px solid var(--gold-dark); border-radius: 15px; padding: 25px; text-align: center; transition: 0.3s; position: relative; }
+        .coin-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); background: linear-gradient(180deg, #181818, #2a2500); }
+        .coin-icon-wrapper { font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 15px; }
+        .coin-price { font-size: 1.2rem; font-weight: bold; color: #fff; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .coin-amount { font-size: 2rem; font-weight: bold; color: var(--gold-primary); }
+        .coin-bonus-tag { background: #27ae60; color: white; font-weight: bold; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; display: inline-block; margin-top: 10px; animation: pulse 2s infinite; }
+        .coin-bank-note { font-size: 0.85rem; color: #aaa; margin-top: 10px; font-style: italic; }
+
+        footer { background: #050505; padding: 30px 0; text-align: center; border-top: 1px solid #222; }
+
+        /* --- Modal --- */
+        .modal-content-royal { background: #1a1a1a; border: 1px solid var(--gold-primary); color: #fff; }
+        .modal-header { border-bottom: 1px solid #333; }
+        .discord-popup-btn { background-color: #5865F2; color: white; width: 100%; padding: 15px; font-weight: bold; font-size: 1.2rem; border: none; border-radius: 8px; transition: 0.3s; }
+        .discord-popup-btn:hover { background-color: #4752c4; color: white; transform: translateY(-2px); }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-royal">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-crown me-2"></i>AMBER KINGDOM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-3"><a class="nav-link" href="#features">Tính năng</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="#ranks">Rank</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="#keys">Keys</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="#coins">Coins</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-buy-nav" onclick="openBuyModal('Tư vấn chung')">
+                            <i class="fa-solid fa-cart-shopping me-2"></i>MUA VẬT PHẨM
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="particles-js"></div>
+
+    <header class="hero-section"
+        style="height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: -70px;">
+        <div class="container" data-aos="zoom-in" data-aos-duration="1500">
+            <h1 class="hero-title" style="font-size: 4.5rem; margin-bottom: 1rem;">AMBER <span
+                    class="gold-text">KINGDOM</span></h1>
+            <p class="lead fs-4 fst-italic text-white-50 mb-4">Vàng Bạc - Tiền Tài - Danh Vọng</p>
+
+            <div class="d-flex justify-content-center gap-3 flex-wrap mb-5 hero-btn-group">
+                <button class="btn btn-ip" onclick="copyIP('pc')">
+                    <i class="fa-solid fa-desktop"></i>
+                    <div style="font-size: 0.75rem; opacity: 0.7; font-weight: normal; margin-top: 2px;">COPY IP PC</div>
+                </button>
+                <a href="https://discord.gg/KmVFqC39su" target="_blank" class="btn btn-discord-hero">
+                    <i class="fa-brands fa-discord me-2 fs-4"></i> THAM GIA DISCORD
+                </a>
+                <button class="btn btn-ip" onclick="copyIP('pe')">
+                    <i class="fa-solid fa-mobile-screen-button"></i> 
+                    <div style="font-size: 0.75rem; opacity: 0.7; font-weight: normal; margin-top: 2px;">COPY IP PE</div>
+                </button>
+            </div>
+
+            <div class="royal-event-container">
+                <div class="event-badge"><i class="fa-solid fa-scroll me-2"></i>THÔNG CÁO</div>
+                <div class="event-content" id="eventTicker"></div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="gold-text" style="font-size: 3rem;">TÍNH NĂNG ĐẶC SẮC</h2>
+            <div class="section-title-line"></div>
+            <p class="text-white-50 fst-italic fs-5">Tinh hoa hội tụ - Đẳng cấp Hoàng Gia</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card-royal text-center">
+                    <div class="icon-gem-wrapper"><i class="fa-solid fa-dungeon feature-icon"></i></div>
+                    <h4 class="noble-font feature-title">RPG & Hầm Ngục</h4>
+                    <p class="feature-desc">Hệ thống Level, Kỹ năng (Skill), Nghề nghiệp (Job) và chinh phục Dungeon săn boss nhận đồ hiếm.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card-royal text-center">
+                    <div class="icon-gem-wrapper"><i class="fa-solid fa-sack-dollar feature-icon"></i></div>
+                    <h4 class="noble-font feature-title">Kinh Tế Sôi Động</h4>
+                    <p class="feature-desc">Chợ đen (AH), Xổ số (Lotteries), Shop hệ thống và giao dịch tự do giữa người chơi.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card-royal text-center">
+                    <div class="icon-gem-wrapper"><i class="fa-solid fa-users feature-icon"></i></div>
+                    <h4 class="noble-font feature-title">Cộng Đồng & Tiện Ích</h4>
+                    <p class="feature-desc">Tính năng Team, TPA, Home, Nick, Claim đất bảo vệ tài sản.<br><span style="color:var(--gold-primary); font-weight:bold;">✨ Warp Player:</span> Dịch chuyển ngay tới người chơi khác.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-card-royal text-center">
+                    <div class="icon-gem-wrapper"><i class="fa-solid fa-gem feature-icon"></i></div>
+                    <h4 class="noble-font feature-title">CoinShop Đẳng Cấp</h4>
+                    <p class="feature-desc">Dùng Coin mua Skin công cụ, Pet (Thú cưng), Hiệu ứng đẹp mắt và mở rộng diện tích Claim.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-card-royal text-center">
+                    <div class="icon-gem-wrapper"><i class="fa-solid fa-map-location-dot feature-icon"></i></div>
+                    <h4 class="noble-font feature-title">Khu Vực (Warp)</h4>
+                    <p class="feature-desc">Arena (PvP máu lửa), Khu AFK (Treo máy nhận Coin & Key), Khu Crates (Quay rương may mắn).</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-card-royal text-center">
+                    <div class="icon-gem-wrapper"><i class="fa-solid fa-gift feature-icon"></i></div>
+                    <h4 class="noble-font feature-title">Quà Tặng Ngập Tràn</h4>
+                    <p class="feature-desc">Rewards nhận thưởng mỗi Giờ/Ngày/Tuần, DailyQuest (Nhiệm vụ ngày) và kho 60+ Tags miễn phí.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="ranks" style="background: rgba(255, 215, 0, 0.02);">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-down">
+                <h2 class="gold-text">BẢNG GIÁ RANK (30 NGÀY)</h2>
+                <div class="section-title-line"></div>
+                <p class="text-white-50"><i class="fa-solid fa-circle-info text-warning"></i> Giá hiển thị là giá Bank (Đã giảm 20%)</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100" onclick="openBuyModal('RANK KNIGHT')">
+                    <div class="rank-card">
+                        <div class="rank-header"><h3 class="rank-name">KNIGHT</h3></div>
+                        <div class="rank-price-box">
+                            <div style="text-decoration: line-through; color: #777;">70k Card</div>
+                            <div style="color: var(--gold-primary); font-size: 1.5rem; font-weight: bold;">56.000đ</div>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-house"></i> Home: 5</li>
+                            <li><i class="fa-solid fa-kit-medical"></i> Kit Knight</li>
+                            <li class="fst-italic text-white-50"><small>/nick, /back, /recipe, /feed</small></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200" onclick="openBuyModal('RANK LORD')">
+                    <div class="rank-card">
+                        <div class="rank-header"><h3 class="rank-name">LORD</h3></div>
+                        <div class="rank-price-box">
+                            <div style="text-decoration: line-through; color: #777;">120k Card</div>
+                            <div style="color: var(--gold-primary); font-size: 1.5rem; font-weight: bold;">96.000đ</div>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-house"></i> Home: 10</li>
+                            <li><i class="fa-solid fa-kit-medical"></i> Kit Lord</li>
+                            <li class="fst-italic text-white-50"><small>Lệnh Knight + /near, /craft</small></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="300" onclick="openBuyModal('RANK PALADIN')">
+                    <div class="rank-card">
+                        <div class="rank-header"><h3 class="rank-name">PALADIN</h3></div>
+                        <div class="rank-price-box">
+                            <div style="text-decoration: line-through; color: #777;">170k Card</div>
+                            <div style="color: var(--gold-primary); font-size: 1.5rem; font-weight: bold;">136.000đ</div>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-house"></i> Home: 15</li>
+                            <li><i class="fa-solid fa-kit-medical"></i> Kit Paladin</li>
+                            <li class="fst-italic text-white-50"><small>Lệnh Lord + /enderchest, /ptime</small></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="400" onclick="openBuyModal('RANK DUKE')">
+                    <div class="rank-card">
+                        <div class="rank-header"><h3 class="rank-name">DUKE</h3></div>
+                        <div class="rank-price-box">
+                            <div style="text-decoration: line-through; color: #777;">230k Card</div>
+                            <div style="color: var(--gold-primary); font-size: 1.5rem; font-weight: bold;">184.000đ</div>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-infinity"></i> Home: Vô hạn</li>
+                            <li><i class="fa-solid fa-kit-medical"></i> Kit Duke</li>
+                            <li class="fst-italic text-white-50"><small>Lệnh Paladin + /heal, /fly</small></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="500" onclick="openBuyModal('RANK KING')">
+                    <div class="rank-card" style="border: 2px solid var(--gold-primary);">
+                        <div class="rank-header" style="background: linear-gradient(45deg, var(--gold-dark), var(--gold-primary));">
+                            <h3 class="rank-name" style="color:#000;">KING</h3>
+                        </div>
+                        <div class="rank-price-box">
+                            <div style="text-decoration: line-through; color: #777;">270k Card</div>
+                            <div style="color: var(--gold-primary); font-size: 1.5rem; font-weight: bold;">216.000đ</div>
+                        </div>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-infinity"></i> Home: Vô hạn</li>
+                            <li><i class="fa-solid fa-crown"></i> Kit King Bá Đạo</li>
+                            <li class="fst-italic text-white-50"><small>All lệnh Duke + /pweather, /repair</small></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="keys">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="gold-text">KHO BÁU HOÀNG GIA (KEYS)</h2>
+                <div class="section-title-line"></div>
+                <p class="lead">Đồng giá: <span class="gold-text fw-bold">10.000đ / Gói</span></p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100" onclick="openBuyModal('KEY COMMON')">
+                    <div class="key-card-royal key-common">
+                        <i class="fa-solid fa-key key-icon"></i>
+                        <h4 class="key-title">COMMON</h4>
+                        <div class="key-qty" style="color: var(--key-common)">5 Key</div>
+                        <div class="key-bonus"><i class="fa-solid fa-gift me-1"></i>Bank tặng +2</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200" onclick="openBuyModal('KEY RARE')">
+                    <div class="key-card-royal key-rare">
+                        <i class="fa-solid fa-gem key-icon"></i>
+                        <h4 class="key-title">RARE</h4>
+                        <div class="key-qty" style="color: var(--key-rare)">4 Key</div>
+                        <div class="key-bonus"><i class="fa-solid fa-gift me-1"></i>Bank tặng +2</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300" onclick="openBuyModal('KEY EPIC')">
+                    <div class="key-card-royal key-epic">
+                        <i class="fa-solid fa-dragon key-icon"></i>
+                        <h4 class="key-title">EPIC</h4>
+                        <div class="key-qty" style="color: var(--key-epic)">3 Key</div>
+                        <div class="key-bonus"><i class="fa-solid fa-gift me-1"></i>Bank tặng +1</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400" onclick="openBuyModal('KEY SUPERIOR')">
+                    <div class="key-card-royal key-superior">
+                        <i class="fa-solid fa-crown key-icon"></i>
+                        <h4 class="key-title" style="color: var(--gold-primary)">SUPERIOR</h4>
+                        <div class="key-qty" style="color: var(--gold-primary)">1 Key</div>
+                        <div class="key-bonus"><i class="fa-solid fa-gift me-1"></i>Bank tặng +1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coins" style="background: rgba(0,0,0,0.3);">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="gold-text">QUY ĐỔI COINS (TIỀN TỆ)</h2>
+                <div class="section-title-line"></div>
+                <p class="text-white-50">Sử dụng để mua Skin, Pet, Đất và nhiều vật phẩm giá trị</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100" onclick="openBuyModal('GÓI 10K COIN')">
+                    <div class="coin-card">
+                        <div class="coin-icon-wrapper"><i class="fa-solid fa-coins"></i></div>
+                        <div class="coin-price">10.000đ Card</div>
+                        <div class="coin-amount">80 Coins</div>
+                        <div class="coin-bonus-tag">Bank: Tặng 20 Coins</div>
+                        <div class="coin-bank-note">(Tổng nhận: 100 Coins)</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200" onclick="openBuyModal('GÓI 20K COIN')">
+                    <div class="coin-card">
+                        <div class="coin-icon-wrapper"><i class="fa-solid fa-coins fa-lg"></i></div>
+                        <div class="coin-price">20.000đ Card</div>
+                        <div class="coin-amount">160 Coins</div>
+                        <div class="coin-bonus-tag">Bank: Tặng 60 Coins</div>
+                         <div class="coin-bank-note">(Tổng nhận: 220 Coins)</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300" onclick="openBuyModal('GÓI 50K COIN')">
+                    <div class="coin-card">
+                        <div class="coin-icon-wrapper"><i class="fa-solid fa-sack-dollar fa-lg"></i></div>
+                        <div class="coin-price">50.000đ Card</div>
+                        <div class="coin-amount">400 Coins</div>
+                        <div class="coin-bonus-tag" style="background: #d35400;">Bank: Tặng 100 Coins</div>
+                         <div class="coin-bank-note">(Tổng nhận: 500 Coins)</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400" onclick="openBuyModal('GÓI 100K COIN')">
+                    <div class="coin-card" style="border-color: var(--gold-primary);">
+                        <div class="coin-icon-wrapper"><i class="fa-solid fa-box-open fa-2x"></i></div>
+                        <div class="coin-price">100.000đ Card</div>
+                        <div class="coin-amount" style="font-size: 2.2rem;">800 Coins</div>
+                        <div class="coin-bonus-tag" style="background: #c0392b; animation: pulse 1s infinite;">Bank: Tặng 200 Coins</div>
+                         <div class="coin-bank-note">(Tổng nhận: 1000 Coins)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h3 class="gold-text noble-font">AMBER KINGDOM</h3>
+            <p class="text-white-50">&copy; 2026 Designed for Amber Kingdom</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-royal">
+                <div class="modal-header">
+                    <h5 class="modal-title noble-font" id="buyModalLabel"><i
+                            class="fa-solid fa-circle-exclamation text-warning me-2"></i>HƯỚNG DẪN MUA HÀNG</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="text-warning fw-bold mb-3" id="modalProductInfo" style="font-size: 1.1rem;"></p>
+                    <p class="fs-5">Vui lòng tham gia Discord và tạo <strong>Ticket Hỗ Trợ</strong> để thực hiện giao
+                        dịch an toàn.</p>
+                    <p class="text-white-50 small">Admin sẽ phản hồi ngay lập tức!</p>
+                    <a href="https://discord.gg/KmVFqC39su" target="_blank"
+                        class="discord-popup-btn d-block text-decoration-none mt-4">
+                        <i class="fa-brands fa-discord me-2"></i>TẠO TICKET NGAY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+        AOS.init({ once: true, duration: 1000 });
+
+        particlesJS("particles-js", {
+            "particles": { "number": { "value": 50 }, "color": { "value": "#ffd700" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "out_mode": "out" } }
+        });
+
+        function copyIP(type) {
+            let ip = "";
+            let msg = "";
+            if (type === 'pc') {
+                ip = "45.117.164.156:27001";
+                msg = "Đã copy IP PC: " + ip;
+            } else {
+                ip = "45.117.164.156:27002";
+                msg = "Đã copy IP PE: " + ip;
+            }
+            navigator.clipboard.writeText(ip).then(function () {
+                alert(msg + "\nHãy vào game và chiến ngay!");
+            });
+        }
+
+        // HÀM MỞ MODAL VÀ CẬP NHẬT TÊN SẢN PHẨM
+        function openBuyModal(productName) {
+            document.getElementById('modalProductInfo').innerText = "Bạn đang quan tâm: " + productName;
+            var myModal = new bootstrap.Modal(document.getElementById('buyModal'));
+            myModal.show();
+        }
+
+        const events = [
+            'Sự kiện: Khai mở Hầm Ngục (01/02) - Code: <span class="text-warning fw-bold">HELLOAMBER</span>',
+            'Sự kiện: THE END (07/02) - <span class="text-warning fw-bold">Free Rank</span> cho người giữ Trứng Rồng!'
+        ];
+
+        let eventIndex = 0;
+        const tickerElement = document.getElementById('eventTicker');
+        
+        tickerElement.innerHTML = events[0];
+        tickerElement.classList.add('fade-in-up');
+
+        setInterval(() => {
+            eventIndex = (eventIndex + 1) % events.length;
+            tickerElement.classList.remove('fade-in-up');
+            void tickerElement.offsetWidth; 
+            tickerElement.innerHTML = events[eventIndex];
+            tickerElement.classList.add('fade-in-up');
+        }, 5000); 
+    </script>
+</body>
+
+</html>
